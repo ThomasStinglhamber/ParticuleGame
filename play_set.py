@@ -17,7 +17,7 @@ orange = ( 255, 170, 0)
 player1 = Player("quark down", red, 200, 100)
 player2 = Player("quark up", blue, 800, 200)
 player3 = Player("quark bottom", orange, 500, 100)
-player4 = Player("proton", green, 1380/2,700/2)
+player4 = Player("proton", green, 1380/2,700/2) #arriver à mettre la position de collision des 3 particules
 
 run = True
 moving1 = False
