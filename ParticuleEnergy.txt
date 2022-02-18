@@ -1,0 +1,44 @@
+Up_quark	2,30
+Up_antiquark	2,30
+Down_quark	4,80
+Down_antiquark	4,80
+Strange_quark	95,00
+Strange_antiquark	95,00
+Pion	139,50
+Kaon	891,66
+Proton	938,20
+Neutron	939,50
+Phi_Meson	1019,40
+Lambda	1115,60
+Sigma	1189,30
+Delta	1232,00
+Charmed_quark	1275,00
+Charmed_antiquark	1275,00
+Xi	1314,80
+D_Meson	2010,26
+Strange_D_Meson	2112,10
+Charmed_Lambda	2286,40
+Charmed_Sigma	2453,90
+Charmed_Xi	2467,40
+Charmed_Omega	2695,20
+Charmed_Eta_Meson	2983,60
+Double_Charmed_Xi	3621,20
+Bottom_quark	4180,00
+Bottom_antiquark	4180,00
+B_Meson	5325,20
+Strange_B_Meson	5415,40
+Bottom_Lambda	5619,60
+Bottom_Xi	5791,90
+Bottom_Sigma	5810,50
+Bottom_Omega	6046,10
+Upsilon_Meson	9460,30
+Top_quark	173210,00
+Top_antiquark	173210,00
+Double_Bottom_Xi	
+Charmed_Bottom_Xi	
+Charmed_Bottom_Omega	
+Double_Charmed_Omega	
+Double_Bottom_Omega	
+Double_Charmed_Bottom_Omega	
+Charmed_Double_Bottom_Omega	
+Charmed_B_Meson	

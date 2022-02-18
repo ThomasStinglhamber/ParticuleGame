@@ -23,7 +23,7 @@ def collision3(particule1,particule2,particule3):
             break
         else : pass
         
-    return decouverte
+    return decouverte,particule1_name,particule2_name,particule3_name
 
 def collision2(particule1,particule2):
     
@@ -39,4 +39,4 @@ def collision2(particule1,particule2):
             break
         else : pass
         
-    return decouverte
+    return decouverte,particule1_name,particule2_name

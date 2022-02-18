@@ -10,7 +10,7 @@ import numpy as np
 
 def Up_quark():
     name ='Up_quark'
-    energy = 4
+    energy = 2.3 #MeV/c^2
     interaction = {'Up_quark'+'Down_quark': 'Proton',
                    'Down_quark'+'Up_quark': 'Proton',
                    
@@ -60,7 +60,7 @@ def Up_quark():
 
 def Down_quark():
     name='Down_quark'
-    energy = 4
+    energy = 4.8
     interaction = {'Up_quark'+'Up_quark' : 'Proton',
                    
                    'Up_quark'+'Down_quark' : 'Neutron',
@@ -108,7 +108,7 @@ def Down_quark():
 
 def Strange_quark():
     name='Strange_quark'
-    energy = 8
+    energy = 95
     interaction = {'Up_quark'+'Down_quark' :'Lambda',
                    'Down_quark'+'Up_quark' :'Lambda',
                    
@@ -154,7 +154,7 @@ def Strange_quark():
     
 def Charmed_quark():
     name='Charmed_quark'
-    energy =0
+    energy = 1275
     interaction = {'Up_quark'+'Down_quark' :'Charmed_Lambda',
                    'Down_quark'+'Up_quark' :'Charmed_Lambda',
                    
@@ -204,7 +204,7 @@ def Charmed_quark():
 
 def Bottom_quark():
     name ='Bottom_quark'
-    energy = 8
+    energy = 4180
     interaction={'Up_quark'+'Down_quark' : 'Bottom_Lambda',
                  'Down_quark'+'Up_quark' : 'Bottom_Lambda',
                  
@@ -246,18 +246,25 @@ def Bottom_quark():
     return name,energy,interaction
 
 
+def Top_quark():
+    name ='Top_quark'
+    energy = 173210
+    interaction={}
+    return name,energy,interaction
+
+
 # ANTI QUARKS --------------------------------------------------
 
 def Up_antiquark():
     name ='Up_antiquark'
-    energy = 4
+    energy = 2.3
     interaction = {'Charmed_quark': 'D_Meson'}
     return name,energy,interaction
 
 
 def Down_antiquark():
     name ='Down_antiquark'
-    energy = 4
+    energy = 4.8
     interaction = {'Up_quark': 'Pion',
                    'Charmed_quark': 'D_Meson'}
     return name,energy,interaction
@@ -265,7 +272,7 @@ def Down_antiquark():
 
 def Strange_antiquark():
     name ='Strange_antiquark'
-    energy = 4
+    energy = 95
     interaction = {'Strange_quark' :'Phi_Meson',
                    
                    'Up_quark': 'Kaon',
@@ -276,14 +283,14 @@ def Strange_antiquark():
 
 def Charmed_antiquark():
     name ='Charmed_antiquark'
-    energy = 4
+    energy = 1275
     interaction = {'Charmed_quark':'Charmed_Eta_Meson'}
     return name,energy,interaction
 
 
 def Bottom_antiquark():
     name ='Bottom_antiquark'
-    energy = 4
+    energy = 4180
     interaction = {'Bottom_quark' : 'Upsilon_Meson',
                    
                    'Up_quark': 'B_Meson',
@@ -293,3 +300,10 @@ def Bottom_antiquark():
                    
                    'Charmed_quark': 'Charmed_B_Meson'}
     return name,energy,interaction
+
+def Top_antiquark():
+    name ='Top_antiquark'
+    energy = 173210
+    interaction={}
+    return name,energy,interaction
+
