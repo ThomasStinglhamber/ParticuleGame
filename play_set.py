@@ -1,8 +1,6 @@
 import pygame, sys
 from pygame.locals import *
-from particule_player import Player1
-from particule_player import Player2
-from particule_player import Player3
+from particule_player import Player
 
 
 pygame.init()
@@ -10,15 +8,16 @@ window = pygame.display.set_mode((1380, 700))
 
 #colors
 white = (255, 255, 255)
-black = (0, 225, 0)
+green = (0, 225, 0)
 red = (255, 0, 0)
 blue = ( 43, 255, 230)
 orange = ( 255, 170, 0)
 
 #load the player
-player1 = Player1("quark down", red)
-player2 = Player2("quark up", blue)
-player3 = Player3("quark bottom", orange)
+player1 = Player("quark down", red, 200, 100)
+player2 = Player("quark up", blue, 800, 200)
+player3 = Player("quark bottom", orange, 500, 100)
+player4 = Player("proton", green, 1380/2,700/2)
 
 run = True
 moving1 = False
@@ -60,12 +59,12 @@ while run:
              player3.rect.move_ip(event.rel)
 
     #collision
-    collision = pygame.sprite.collide_rect(player1, player2)
-    collision = pygame.sprite.collide_rect(player3, player2)
-    if collision == True:
+    collision1 = pygame.sprite.collide_rect(player1, player2)
+    collision2 = pygame.sprite.collide_rect(player3, player2)
+    if collision1 == True and collision2 == True:
         group1.remove(player1,player2,player3)
         startend = True
-        #group1.add(nouvelle particule)
+        group1.add(player4)
         group1.update()
 
     #aspect of the window
