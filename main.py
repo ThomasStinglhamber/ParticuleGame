@@ -7,10 +7,11 @@ Created on Wed Feb 16 12:11:06 2022
 from Particule import *
 from Collision import *
 from Energy import *
+from ComptabilisationEnergy import *
 #ListParticule=['Up_quark','Down_quark','Proton','Neutron','Strange_quark']
 #ListParticuleDecouverte=['Up_quark','Down_quark']
 
-interac =[Up_quark,Bottom_antiquark]
+interac =[Up_quark,Down_antiquark]
 
 NombreQuark =len(interac)
 
@@ -64,9 +65,29 @@ if __name__ == "__main__" :
                     file2 = open('ListeParticule.txt', 'a')
                     file2.write(mot+ "\n")
                     file2.close()
+                    #------ Systeme de point
+                    jauge,points=Gauge(mot)
+                    file4 = open('Point.txt', 'r')
+                    point=file4.read()#.splitlines()
+                    #print(point)
+                    #print(int(point))
+                    tot = int(point)+ points
+                    #print(tot)
+                    tofile = str(tot)
+                    
+                    file3 = open('Point.txt', 'w')
+                    file3.write(tofile)
+                    file3.close()
+                    file4.close()
                     break
             file1.close() 
             break
+    
+    file5=open('Point.txt', 'r')
+    totalepoint =file5.read()
+    print("Point total :" ,totalepoint)
+    file5.close()
+    
     if NouvelleDecouverte == False:
         print("la combinaison donne  rien")
         

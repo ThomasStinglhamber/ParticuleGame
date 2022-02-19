@@ -1,8 +1,6 @@
 
 Neutron
 Proton
-Lambda
-Charmed_Lambda
-Pion
-Kaon
+LambdaB_Meson
 B_Meson
+Pion
