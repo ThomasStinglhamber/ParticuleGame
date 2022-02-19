@@ -8,18 +8,23 @@ from Particule import *
 from Collision import *
 from Energy import *
 from ComptabilisationEnergy import *
-#ListParticule=['Up_quark','Down_quark','Proton','Neutron','Strange_quark']
-#ListParticuleDecouverte=['Up_quark','Down_quark']
 
-interac =[Up_quark,Strange_antiquark]
 
-NombreQuark =len(interac)
+failed=False        # variable  pour voir si on utilise bien les particules decouverte
+                    # normalement pas besoin car les particule ne  seront meme pas affiché si pas decouverte
+try:
+    interac =[Up_quark,Down_antiquark]  # les particules qu'on  fait interagir
+    NombreQuark =len(interac)
+except:
+    failed =True
+
+
 
 NouvelleDecouverte = False
 
 
 
-if __name__ == "__main__" :
+if __name__ == "__main__" and failed==False:
     name,energy,interaction=Down_quark()
     name,energy,interaction=Up_quark()
     name,energy,interaction=Strange_quark()
@@ -53,13 +58,13 @@ if __name__ == "__main__" :
             #print(data1)
             for j in range(len(data1)):
                 #print(data1[j])
-                if mot in data1:
+                if mot in data1:                        # si deja dans la liste, on fait rien
                     print("Particule deja découverte")
                     print("Nom :",decouverte)
                     print("Energie :",energie)
                     NouvelleDecouverte = True
                     break
-                if mot not in data1 :
+                if mot not in data1 :       # si pas dans la liste, on l'ajoute + on donne les points
                     print("------------- Nouvelle decouverte ! -------------")
                     print("Nom :",decouverte)
                     print("Energie :",energie)
@@ -67,7 +72,8 @@ if __name__ == "__main__" :
                     file2 = open('ListeParticule.txt', 'a')
                     file2.write(mot+ "\n")
                     file2.close()
-                    #------ Systeme de point
+                    
+                    #------ Systeme d''ecriture des points
                     jauge,points=Gauge(mot)
                     file4 = open('Point.txt', 'r')
                     point=file4.read()#.splitlines()
@@ -87,13 +93,14 @@ if __name__ == "__main__" :
         
     
     puntos = checkpoint()
-   
+    palier1,palier2,palier3 = Palier(puntos)
+    #print(palier1)
     
-    if NouvelleDecouverte == False:
+    if NouvelleDecouverte == False:         # si la combinaison donne rien on le dit 
         print("la combinaison donne  rien")
         
     file.close()
     
     
-
+else : print('Particule pas encore decouverte') # si on prend une particule qu'on a pas
     

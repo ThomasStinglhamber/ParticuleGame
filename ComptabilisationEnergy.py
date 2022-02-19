@@ -8,6 +8,18 @@ Created on Fri Feb 18 17:57:33 2022
 from Energy import *
 
 def Gauge(particule):
+    """
+
+    Parameters
+    ----------
+    particule : Nom de la particule.
+
+    Returns
+    -------
+    Jauge : liste des points en fonction de chaque particule decouvertte.
+    point : les points de la decouverte.
+
+    """
     Jauge ={'Up_quark':	0,
                  'Up_antiquark' :	0,
                     'Down_quark':	0,
@@ -68,15 +80,37 @@ def Gauge(particule):
 
 palier1=False
 
-def checkpoint():
+def checkpoint(): # permet d'update  les points et print
     file5=open('Point.txt', 'r')
     totalepoint =file5.read()
-    print("Point total :" ,totalepoint)
+    print("Point total :" ,totalepoint,"MeV/c^2")
     file5.close()
     
-    if int(totalepoint) >=500:
-        palier1=True
     return totalepoint
+
+def checkpoint_noprint():# permet d'update  les points mais ne print pas
+    file5=open('Point.txt', 'r')
+    totalepoint =file5.read()
+    #print("Point total :" ,totalepoint,"MeV/c^2")
+    file5.close()
+    
+    return totalepoint
+
+def Palier(point): # definition des differents palier en fonction des points qu'on a 
+    palier1=False
+    palier2=False
+    palier3=False
+    if int(point) >= 100:
+        palier1=True
+        
+    if int(point) >=1300:
+        palier2=True
+        
+    if int(point) >=4200:
+        palier3=True
+    
+    return palier1,palier2,palier3
+
 # =============================================================================
 #     1er pallier, on a de base 100 Mev et on doit avoir 1300 MeV pour pouvoir debloquer
 #     le quark et antiquark charmed. On a 8 reaction mais on peut dire que si on en trouve
@@ -93,18 +127,3 @@ def checkpoint():
 #     dire que a partir du pallier 3 chaque decouverte donne x MeV.
 # =============================================================================
     
-
-# =============================================================================
-#     TO DO :
-#         - faire le systeme de pallier en faisant en sorte que les quarks qu on a pas
-#         debloqué n apparaissent pas ou  alors ne peut  pas etre utilisé.
-#         - mettre les step pour chaque decouverte ( dico surement)
-# =============================================================================
-        
-
-# =============================================================================
-#     creer un .txt avec la jauge d energie qu on a, a chaque decouverte, on ecrit l energie en plus
-#     et au sauvegarde 
-# =============================================================================
-        
-    return 
