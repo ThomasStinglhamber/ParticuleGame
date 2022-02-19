@@ -65,6 +65,18 @@ def Gauge(particule):
     
     return Jauge, point
 
+
+palier1=False
+
+def checkpoint():
+    file5=open('Point.txt', 'r')
+    totalepoint =file5.read()
+    print("Point total :" ,totalepoint)
+    file5.close()
+    
+    if int(totalepoint) >=500:
+        palier1=True
+    return totalepoint
 # =============================================================================
 #     1er pallier, on a de base 100 Mev et on doit avoir 1300 MeV pour pouvoir debloquer
 #     le quark et antiquark charmed. On a 8 reaction mais on peut dire que si on en trouve

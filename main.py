@@ -11,11 +11,13 @@ from ComptabilisationEnergy import *
 #ListParticule=['Up_quark','Down_quark','Proton','Neutron','Strange_quark']
 #ListParticuleDecouverte=['Up_quark','Down_quark']
 
-interac =[Up_quark,Down_antiquark]
+interac =[Up_quark,Strange_antiquark]
 
 NombreQuark =len(interac)
 
 NouvelleDecouverte = False
+
+
 
 if __name__ == "__main__" :
     name,energy,interaction=Down_quark()
@@ -82,11 +84,10 @@ if __name__ == "__main__" :
                     break
             file1.close() 
             break
+        
     
-    file5=open('Point.txt', 'r')
-    totalepoint =file5.read()
-    print("Point total :" ,totalepoint)
-    file5.close()
+    puntos = checkpoint()
+   
     
     if NouvelleDecouverte == False:
         print("la combinaison donne  rien")
