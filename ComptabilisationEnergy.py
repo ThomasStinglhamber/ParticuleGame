@@ -54,16 +54,16 @@ def Gauge(particule):
                     'Bottom_Sigma':	700,
                     'Bottom_Omega':	700,
                     'Upsilon_Meson':	700,
-                    'Top_quark':	173210.00,
-                    'Top_antiquark':	173210.00,
-                    'Double_Bottom_Xi':	'Unknown',
-                    'Charmed_Bottom_Xi':	'Unknown',
-                    'Charmed_Bottom_Omega':	'Unknown',
-                    'Double_Charmed_Omega':	'Unknown',
-                    'Double_Bottom_Omega':	'Unknown',
-                    'Double_Charmed_Bottom_Omega':	'Unknown',
-                    'Charmed_Double_Bottom_Omega':'Unknown',
-                    'Charmed_B_Meson':'Unknown'}
+                    'Top_quark':	1000,              # pas encore sur a partir de la 
+                    'Top_antiquark':	1000,
+                    'Double_Bottom_Xi':	1000,
+                    'Charmed_Bottom_Xi':	1000,
+                    'Charmed_Bottom_Omega':	1000,
+                    'Double_Charmed_Omega':	1000,
+                    'Double_Bottom_Omega':	1000,
+                    'Double_Charmed_Bottom_Omega':	1000,
+                    'Charmed_Double_Bottom_Omega':1000,
+                    'Charmed_B_Meson':1000}
     
     point=0
     for i in Jauge:

@@ -16,7 +16,7 @@ def Energy(item):
                     'Strange_quark':	9500,
                     'Strange_antiquark':	95.00,
                     'Pion': 139.50,
-                    'Kaon': 891.66,
+                    'Kaon': 493.66,
                     'Proton':	938.20,
                     'Neutron	':939.50,
                     'Phi_Meson':	1019.40,
@@ -53,7 +53,7 @@ def Energy(item):
                     'Double_Charmed_Bottom_Omega':	'Unknown',
                     'Charmed_Double_Bottom_Omega':'Unknown',
                     'Charmed_B_Meson':'Unknown'}
-    
+
     ener=0
     for i in listenergy:
         #print(i)
@@ -62,11 +62,6 @@ def Energy(item):
             ener =listenergy[i]
             break
         else : pass
-    
-    
+
+
     return listenergy, ener
-
-
-
-
-    

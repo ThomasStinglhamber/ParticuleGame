@@ -13,7 +13,7 @@ from ComptabilisationEnergy import *
 failed=False        # variable  pour voir si on utilise bien les particules decouverte
                     # normalement pas besoin car les particule ne  seront meme pas affiché si pas decouverte
 try:
-    interac =[Up_quark,Down_antiquark]  # les particules qu'on  fait interagir
+    interac =[Strange_quark,Strange_antiquark]  # les particules qu'on  fait interagir
     NombreQuark =len(interac)
 except:
     failed =True
