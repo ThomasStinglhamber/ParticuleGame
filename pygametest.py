@@ -14,9 +14,47 @@ green = (0, 225, 0)
 red = (255, 0, 0)
 blue = ( 43, 255, 230)
 orange = ( 255, 170, 0)
-
+black=(0,0,0)
 run = True
 #load the player
+
+
+ 
+def text_objects(text, font):
+    textSurface = font.render(text, True, black)
+    return textSurface, textSurface.get_rect()
+
+def text_objects_white(text, font):
+    textSurface = font.render(text, True, white)
+    return textSurface, textSurface.get_rect()
+ 
+def message_display(text):
+    largeText = pygame.font.Font('freesansbold.ttf',115)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = ((display_width/2),(display_height/2))
+    window.blit(TextSurf, TextRect)
+ 
+    pygame.display.update()
+ 
+    
+def button(msg,x,y,w,h,ic,ac,action=None):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    #print(click)
+    if x+w > mouse[0] > x and y+h > mouse[1] > y:
+        pygame.draw.rect(window, ac,(x,y,w,h))
+
+        if click[0] == 1 and action != None:
+            action()         
+    else:
+        pygame.draw.rect(window, ic,(x,y,w,h))
+
+    smallText = pygame.font.SysFont("comicsansms",20)
+    textSurf, textRect = text_objects(msg, smallText)
+    textRect.center = ( (x+(w/2)), (y+(h/2)) )
+    window.blit(textSurf, textRect)
+    
+    
 players=[]
 
 player1 = Player("quark down", red, 200, 100)
@@ -38,11 +76,9 @@ group1 = pygame.sprite.Group()
 for i in range(len(players)):
     group1.add(players[i])
 
+#button("GO!",1380/3,700*2/3,100,50,red,red,None)
 
 while run:
-    #print(movings)
-    #window.blit(background, (0,0))
-    #print(len(players))
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -52,6 +88,8 @@ while run:
             sys.exit()
 
         #mouse play
+       
+
         for i in range(len(players)):
             if event.type == MOUSEBUTTONDOWN:
     
@@ -81,8 +119,8 @@ while run:
                                     movings.append(False)
                                     group1.remove(players[i],players[j],players[k])
                                     #print(i,j,k)
-                                    players.pop(j)
-                                    movings.pop(j)
+                                    #players.pop(j)
+                                    #movings.pop(j)
                                     players.pop(i)
                                     movings.pop(i)
                                     #players.pop(k)
@@ -96,9 +134,12 @@ while run:
                                     group1.update()
                                     #clock.tick(15)
         #aspect of the window
+
     window.fill(white)
+    button("GO!",1380/3,700*2/3,100,50,red,red,group1.add(player1))
     group1.draw(window)
 
     pygame.display.update()
+
 
 

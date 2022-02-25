@@ -29,7 +29,7 @@ def Gauge(particule):
                     'Pion': 200,
                     'Kaon': 200,
                     'Proton':	200,
-                    'Neutron	':200,
+                    'Neutron':200,
                     'Phi_Meson':	200,
                     'Lambda':	200,
                     'Sigma':	200,

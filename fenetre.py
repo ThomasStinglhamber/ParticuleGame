@@ -3,9 +3,16 @@ import pygame
 from pygame.locals import *
 from particule_player import Player
 import buttonn
+from affichage_parti import *
+import random
+from conversionchiffre_parti import *
+from color_particule import *
+from main import *
+from conversionSTR_DEF import *
 
 pygame.init()
- 
+clock = pygame.time.Clock()
+clock.tick(2)
 display_width = 1500
 display_height = 910
  
@@ -50,7 +57,8 @@ for row in range(ROWS):
 	r = [-1] * MAX_COLS
 	world_data.append(r)
 
-    
+
+interaction=[]
 
  
 def text_objects(text, font):
@@ -167,103 +175,139 @@ def draw_grid():
 
     
 def game_loop():
+    gameExit = False
 
     white = (255, 255, 255)
     green = (0, 225, 0)
     red = (255, 0, 0)
     blue = ( 43, 255, 230)
     orange = ( 255, 170, 0)
+    gray=(156,156,156)
+    
     current_tile = 0
-    #load the player
-    player1 = Player("quark down", red, 200, 100)
-    player2 = Player("quark up", blue, 800, 200)
-    player3 = Player("quark bottom", orange, 500, 100)
-    player4 = Player("proton", green, 1380/2,700/2) #arriver à mettre la position de collision des 3 particules
     
-    gameExit = False
-    moving1 = False
-    moving2 = False
-    moving3 = False
-    
-    group1 = pygame.sprite.Group()
-    group1.add(player1, player2, player3)
+# =============================================================================
+#     #load the player
+#     player1 = Player("quark down", red, 200, 100)
+#     player2 = Player("quark up", blue, 800, 200)
+#     player3 = Player("quark bottom", orange, 500, 100)
+#     player4 = Player("proton", green, 1380/2,700/2) #arriver à mettre la position de collision des 3 particules
+#     
+#     moving1 = False
+#     moving2 = False
+#     moving3 = False
+#     
+#     group1 = pygame.sprite.Group()
+#     group1.add(player1, player2, player3)
+# =============================================================================
     
     img_list = []
     for x in range(TILE_TYPES):
         	img = pygame.image.load(f'img/tile/{x}.png').convert_alpha()
         	img = pygame.transform.scale(img, (TILE_SIZE, TILE_SIZE))
         	img_list.append(img)
+        
+        
     #make a button list
     button_list = []
     button_col = 0
     button_row = 0
-    for i in range(len(img_list)):
-        	tile_button = buttonn.Button( SCREEN_WIDTH+( 45*button_col),  45*button_row , img_list[i], 1)
+    liste_decouv=[]
+    file4 = open('ListeParticule.txt', 'r')
+    parti=file4.read().splitlines()
+    file4.close()
+    
+    #print(parti)
+    for i in parti:
+        chif=affichage_particule(i)
+        liste_decouv.append(chif)
+        
+    for i in range(len(img_list)):# liste_decouv
+        	tile_button = buttonn.Button( SCREEN_WIDTH+( 65*button_col),  65*button_row, img_list[i], 1)
         	button_list.append(tile_button)
         	button_col += 1
         	if button_col == 4:
         		button_row += 1
         		button_col = 0
  
+    
+ 
+    players=[]
+    NOM=[]
+    movings=[]
+    group1 = pygame.sprite.Group()
     while not gameExit:
-
+        clock.tick(5)
+        intera=[]
+        button_count=0
+        for button_count,i in enumerate(button_list):
+            if i.draw(screen):
+                current_tile =button_count
+                name = name_parti(current_tile)
+                color = color_parti(name)
+                lastplayer=Player(name, color, random.randrange(500), random.randrange(500))
+                test = Player.nom(name)
+                #print(test)
+                players.append(lastplayer)
+                movings.append(False)
+                NOM.append(test)
+                group1.add(players[-1])
+                group1.update()
+                #print(lastplayer)
+                
+                
+        group1.draw(gameDisplay)
+        pygame.draw.rect(screen, red, button_list[current_tile].rect, 3)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
- 
-    
-            if event.type == MOUSEBUTTONDOWN:
-                    if player1.rect.collidepoint(event.pos):
-                        moving1 = True
-                    if player2.rect.collidepoint(event.pos):
-                        moving2 = True
-                    if player3.rect.collidepoint(event.pos):
-                        moving3 = True
-        
-            elif event.type == MOUSEBUTTONUP:
-                  moving1 = False
-                  moving2 = False
-                  moving3 = False
-        
-            elif event.type == MOUSEMOTION and moving1:
-                 player1.rect.move_ip(event.rel)
-            elif event.type == MOUSEMOTION and moving2:
-                 player2.rect.move_ip(event.rel)
-            elif event.type == MOUSEMOTION and moving3:
-                 player3.rect.move_ip(event.rel)
-        
-            #collision
-            collision1 = pygame.sprite.collide_rect(player1, player2)
-            collision2 = pygame.sprite.collide_rect(player3, player2)
-            if collision1 == True and collision2 == True:
-                group1.remove(player1,player2,player3)
-                startend = True
-                group1.add(player4)
-                group1.update()
-        
-        
-            pygame.display.update()
-            
-        gameDisplay.fill(white)
-        group1.draw(gameDisplay)
-            
-        pygame.draw.rect(screen, green, (SCREEN_WIDTH,0, SIDE_MARGIN, SCREEN_HEIGHT))
-        draw_grid()
-        
-        
-        button_count=0
-        for button_count,i in enumerate(button_list):
-            if i.draw(screen):
-                current_tile =button_count
-                print(current_tile)
-                group1.add(player4)
-                group1.update()
                 
-        pygame.draw.rect(screen, red, button_list[current_tile].rect, 3)
+            if len(players)>=3:
+                for i in range(len(players)):
+                    if event.type == MOUSEBUTTONDOWN:
+            
+                        if players[i].rect.collidepoint(event.pos):
+                            movings[i] = True
+                            
+            
+                    elif event.type == MOUSEBUTTONUP:
+                        movings[i] = False
+            
+                    elif event.type == MOUSEMOTION and movings[i]:
+                         players[i].rect.move_ip(event.rel)
         
+                    
+                    for j in range(len(players)):
+                            for k in range(len(players)):
+                                if len(players)>=3:
+                                    if i != j and i != k and j != k:
+                                        collision1 = pygame.sprite.collide_rect(players[i], players[j])
+                                        collision2 = pygame.sprite.collide_rect(players[i], players[k])
+                                        
+                                        if collision1 == True and collision2 == False:
+                                            interaction=[NOM[i],NOM[j]]
+                                            
+                                            Principal(interaction)
+                                            #time.sleep(3)
+                                        #print(collision1,collision2)
+                                        if collision1 == True and collision2 == True:
+                                            interaction=[NOM[i],NOM[j],NOM[k]]
+                                           
+                                            Principal(interaction)
+                                            #time.sleep(3)
+            pygame.display.update()
+        gameDisplay.fill(white)
         
+            
+        pygame.draw.rect(screen, gray, (SCREEN_WIDTH,0, SIDE_MARGIN, SCREEN_HEIGHT))
+        #draw_grid()
+        
+    
+    return interaction
+        
+            
         
     
     
@@ -291,13 +335,12 @@ def PasImplementer():
         clock.tick(15)
         
 
+
 game_intro()
-
 mode()
-game_loop()
+INTERACTION=game_loop()
 PasImplementer()
-
-
+#print(INTERACTION)
 
 pygame.quit()
 quit()

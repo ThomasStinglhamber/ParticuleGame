@@ -7,4 +7,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()#deplacement
         self.rect.x = x
         self.rect.y = y
+        self.name = particule1
         pygame.draw.circle(self.image, color, (20, 20),20, 0)
+        
+    def nom(particule1):
+        return particule1

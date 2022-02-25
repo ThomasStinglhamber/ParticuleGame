@@ -1,8 +1,6 @@
-
-Neutron
-Proton
-LambdaB_Meson
-B_Meson
-Pion
+Up_quark
+Up_antiquark
+Down_quark
+Down_antiquark
 Kaon
-Phi_Meson
+Pion

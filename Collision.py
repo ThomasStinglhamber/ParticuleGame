@@ -26,7 +26,6 @@ def collision3(particule1,particule2,particule3):
     return decouverte,particule1_name,particule2_name,particule3_name
 
 def collision2(particule1,particule2):
-    
     decouverte=''
     particule1_name,particule1_energy,particule1_interaction= particule1()
     particule2_name,particule2_energy,particule2_interaction= particule2()
