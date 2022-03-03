@@ -2,5 +2,5 @@ Up_quark
 Up_antiquark
 Down_quark
 Down_antiquark
-Kaon
-Pion
+Proton
+Neutron

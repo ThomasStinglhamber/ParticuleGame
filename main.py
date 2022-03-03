@@ -113,6 +113,6 @@ def Principal(INTERACTION):
     #else : print('Particule pas encore decouverte') # si on prend une particule qu'on a pas
     
     interac=[]
-    return
+    return mot
 
 

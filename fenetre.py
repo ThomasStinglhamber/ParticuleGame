@@ -138,7 +138,21 @@ def game_intro():
 
         pygame.display.update()
        # clock.tick(15)
-        
+       
+def affich_point():
+    punnttos=checkpoint_noprint()
+    smallText = pygame.font.SysFont("comicsansms",20)
+    TextSurf, TextRect = text_objects("Points : "+str(punnttos), smallText)
+    TextRect.center = ((display_width*3/4),(display_height/25))
+    gameDisplay.blit(TextSurf, TextRect)
+    
+def affich_derniere_decouv(decouvertee):
+    punnttos=checkpoint_noprint()
+    smallText = pygame.font.SysFont("comicsansms",20)
+    TextSurf, TextRect = text_objects("Derniere decouverte : "+str(decouvertee), smallText)
+    TextRect.center = ((display_width*3/4),(display_height/24))
+    gameDisplay.blit(TextSurf, TextRect)
+                 
         
 def mode():
 
@@ -235,8 +249,19 @@ def game_loop():
     players=[]
     NOM=[]
     movings=[]
+# =============================================================================
+#     for i in range(3):
+#         lastplayer=Player('test', white, 1500+50*i, 910+50*i)
+#         test = Player.nom('test')
+#         #print(test)
+#         players.append(lastplayer)
+#         movings.append(False)
+#         NOM.append(test)
+# =============================================================================
+        
     group1 = pygame.sprite.Group()
     while not gameExit:
+        affich_point()
         clock.tick(5)
         intera=[]
         button_count=0
@@ -266,16 +291,16 @@ def game_loop():
                 
             if len(players)>=3:
                 for i in range(len(players)):
-                    if event.type == MOUSEBUTTONDOWN:
+                    if len(players)>=3 and event.type == MOUSEBUTTONDOWN:
             
-                        if players[i].rect.collidepoint(event.pos):
+                        if len(players)>=3 and players[i].rect.collidepoint(event.pos):
                             movings[i] = True
                             
             
-                    elif event.type == MOUSEBUTTONUP:
+                    elif len(players)>=3 and event.type == MOUSEBUTTONUP:
                         movings[i] = False
             
-                    elif event.type == MOUSEMOTION and movings[i]:
+                    elif len(players)>=3 and event.type == MOUSEMOTION and movings[i]:
                          players[i].rect.move_ip(event.rel)
         
                     
@@ -289,19 +314,40 @@ def game_loop():
                                         if collision1 == True and collision2 == False:
                                             interaction=[NOM[i],NOM[j]]
                                             
-                                            Principal(interaction)
-                                            #time.sleep(3)
+                                            decouv=Principal(interaction)
+                                            newone =decouv
+                                            
+                                            if decouv !='':
+                                                 del players[0:len(players)]
+                                                 del NOM[0:len(NOM)]
+                                                 del movings[0:len(movings)]
+                                                 group1.empty()
+                                                 time.sleep(1)
+                                                 #break
                                         #print(collision1,collision2)
                                         if collision1 == True and collision2 == True:
                                             interaction=[NOM[i],NOM[j],NOM[k]]
                                            
-                                            Principal(interaction)
+                                            decouv=Principal(interaction)
+                                            newone =decouv
+                                            
+                                            if decouv !='':
+                                                 players.clear()
+                                                 NOM.clear()
+                                                 movings.clear()
+                                                 group1.empty()
+                                                 time.sleep(1)
+                                                 #break
                                             #time.sleep(3)
+                                        affich_derniere_decouv(newone)
             pygame.display.update()
         gameDisplay.fill(white)
+        pygame.draw.rect(screen, gray, (SCREEN_WIDTH,0, SIDE_MARGIN, SCREEN_HEIGHT))
+        trash = pygame.draw.rect(screen, red, (0,SCREEN_HEIGHT-100, 100, SCREEN_HEIGHT))
+        
         
             
-        pygame.draw.rect(screen, gray, (SCREEN_WIDTH,0, SIDE_MARGIN, SCREEN_HEIGHT))
+
         #draw_grid()
         
     
