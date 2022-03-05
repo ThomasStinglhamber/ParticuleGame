@@ -210,7 +210,7 @@ def tile_cote():
         chif=affichage_particule(i)
         liste_decouv.append(chif)
         
-    print(liste_decouv)
+    #print(liste_decouv)
     for i in liste_decouv:# img_list
         	tile_button = buttonn.Button( SCREEN_WIDTH+( 65*button_col),  65*button_row, img_list[i], 1)
         	button_list.append(tile_button)
@@ -233,22 +233,7 @@ def game_loop():
     
     current_tile = 0
     
-# =============================================================================
-#     #load the player
-#     player1 = Player("quark down", red, 200, 100)
-#     player2 = Player("quark up", blue, 800, 200)
-#     player3 = Player("quark bottom", orange, 500, 100)
-#     player4 = Player("proton", green, 1380/2,700/2) #arriver à mettre la position de collision des 3 particules
-#     
-#     moving1 = False
-#     moving2 = False
-#     moving3 = False
-#     
-#     group1 = pygame.sprite.Group()
-#     group1.add(player1, player2, player3)
-# =============================================================================
-    
-    
+
  
     
     button_list =tile_cote()
@@ -256,16 +241,7 @@ def game_loop():
     NOM=[]
     movings=[]
     newone ='Nothing'
-# =============================================================================
-#     for i in range(3):
-#         lastplayer=Player('test', white, 1500+50*i, 910+50*i)
-#         test = Player.nom('test')
-#         #print(test)
-#         players.append(lastplayer)
-#         movings.append(False)
-#         NOM.append(test)
-# =============================================================================
-        
+
     group1 = pygame.sprite.Group()
     while not gameExit:
         affich_point()
@@ -296,22 +272,22 @@ def game_loop():
                 pygame.quit()
                 quit()
                 
-            if len(players)>=3:
+            if len(players)>=1:
                 for i in range(len(players)):
-                    if len(players)>=3 and event.type == MOUSEBUTTONDOWN:
+                    if len(players)>=1 and event.type == MOUSEBUTTONDOWN:
             
-                        if len(players)>=3 and players[i].rect.collidepoint(event.pos):
+                        if len(players)>=1 and players[i].rect.collidepoint(event.pos):
                             movings[i] = True
                             
             
-                    elif len(players)>=3 and event.type == MOUSEBUTTONUP:
+                    elif len(players)>=1 and event.type == MOUSEBUTTONUP:
                         movings[i] = False
             
-                    elif len(players)>=3 and event.type == MOUSEMOTION and movings[i]:
+                    elif len(players)>=1 and event.type == MOUSEMOTION and movings[i]:
                          players[i].rect.move_ip(event.rel)
         
                     #trashcan = pygame.sprite.collide_rect(players[i], trash)
-                    if len(players)>=3 and players[i].rect.colliderect(trash) :
+                    if len(players)>=1 and players[i].rect.colliderect(trash) :
                         players.clear()
                         NOM.clear()
                         movings.clear()
