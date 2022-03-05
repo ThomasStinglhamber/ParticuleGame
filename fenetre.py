@@ -150,7 +150,7 @@ def affich_derniere_decouv(decouvertee):
     punnttos=checkpoint_noprint()
     smallText = pygame.font.SysFont("comicsansms",20)
     TextSurf, TextRect = text_objects("Derniere decouverte : "+str(decouvertee), smallText)
-    TextRect.center = ((display_width*3/4),(display_height/24))
+    TextRect.center = ((display_width*29/40),(display_height/58))
     gameDisplay.blit(TextSurf, TextRect)
                  
         
@@ -187,7 +187,40 @@ def draw_grid():
 	for c in range(ROWS + 1):
 		pygame.draw.line(screen, black, (SCREEN_WIDTH, c * TILE_SIZE), (SCREEN_WIDTH+SIDE_MARGIN, c * TILE_SIZE))
 
+
+def tile_cote():
+    img_list = []
+    for x in range(TILE_TYPES):
+        	img = pygame.image.load(f'img/tile/{x}.png').convert_alpha()
+        	img = pygame.transform.scale(img, (TILE_SIZE, TILE_SIZE))
+        	img_list.append(img)
+        
+        
+    #make a button list
+    button_list = []
+    button_col = 0
+    button_row = 0
+    liste_decouv=[]
+    file4 = open('ListeParticule.txt', 'r')
+    parti=file4.read().splitlines()
+    file4.close()
     
+    #print(parti)
+    for i in parti:
+        chif=affichage_particule(i)
+        liste_decouv.append(chif)
+        
+    print(liste_decouv)
+    for i in liste_decouv:# img_list
+        	tile_button = buttonn.Button( SCREEN_WIDTH+( 65*button_col),  65*button_row, img_list[i], 1)
+        	button_list.append(tile_button)
+        	button_col += 1
+        	if button_col == 4:
+        		button_row += 1
+        		button_col = 0
+    return button_list
+
+
 def game_loop():
     gameExit = False
 
@@ -215,40 +248,14 @@ def game_loop():
 #     group1.add(player1, player2, player3)
 # =============================================================================
     
-    img_list = []
-    for x in range(TILE_TYPES):
-        	img = pygame.image.load(f'img/tile/{x}.png').convert_alpha()
-        	img = pygame.transform.scale(img, (TILE_SIZE, TILE_SIZE))
-        	img_list.append(img)
-        
-        
-    #make a button list
-    button_list = []
-    button_col = 0
-    button_row = 0
-    liste_decouv=[]
-    file4 = open('ListeParticule.txt', 'r')
-    parti=file4.read().splitlines()
-    file4.close()
-    
-    #print(parti)
-    for i in parti:
-        chif=affichage_particule(i)
-        liste_decouv.append(chif)
-        
-    for i in range(len(img_list)):# liste_decouv
-        	tile_button = buttonn.Button( SCREEN_WIDTH+( 65*button_col),  65*button_row, img_list[i], 1)
-        	button_list.append(tile_button)
-        	button_col += 1
-        	if button_col == 4:
-        		button_row += 1
-        		button_col = 0
- 
     
  
+    
+    button_list =tile_cote()
     players=[]
     NOM=[]
     movings=[]
+    newone ='Nothing'
 # =============================================================================
 #     for i in range(3):
 #         lastplayer=Player('test', white, 1500+50*i, 910+50*i)
@@ -262,7 +269,7 @@ def game_loop():
     group1 = pygame.sprite.Group()
     while not gameExit:
         affich_point()
-        clock.tick(5)
+        clock.tick(10)
         intera=[]
         button_count=0
         for button_count,i in enumerate(button_list):
@@ -283,7 +290,7 @@ def game_loop():
                 
         group1.draw(gameDisplay)
         pygame.draw.rect(screen, red, button_list[current_tile].rect, 3)
-        
+        trash = pygame.draw.rect(screen, red, (0,SCREEN_HEIGHT-100, 100, SCREEN_HEIGHT))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -303,7 +310,13 @@ def game_loop():
                     elif len(players)>=3 and event.type == MOUSEMOTION and movings[i]:
                          players[i].rect.move_ip(event.rel)
         
-                    
+                    #trashcan = pygame.sprite.collide_rect(players[i], trash)
+                    if len(players)>=3 and players[i].rect.colliderect(trash) :
+                        players.clear()
+                        NOM.clear()
+                        movings.clear()
+                        group1.empty()
+                        time.sleep(1)
                     for j in range(len(players)):
                             for k in range(len(players)):
                                 if len(players)>=3:
@@ -323,6 +336,7 @@ def game_loop():
                                                  del movings[0:len(movings)]
                                                  group1.empty()
                                                  time.sleep(1)
+                                                 button_list =tile_cote()
                                                  #break
                                         #print(collision1,collision2)
                                         if collision1 == True and collision2 == True:
@@ -337,13 +351,13 @@ def game_loop():
                                                  movings.clear()
                                                  group1.empty()
                                                  time.sleep(1)
+                                                 button_list =tile_cote()
                                                  #break
                                             #time.sleep(3)
-                                        affich_derniere_decouv(newone)
+            affich_derniere_decouv(newone)
             pygame.display.update()
         gameDisplay.fill(white)
         pygame.draw.rect(screen, gray, (SCREEN_WIDTH,0, SIDE_MARGIN, SCREEN_HEIGHT))
-        trash = pygame.draw.rect(screen, red, (0,SCREEN_HEIGHT-100, 100, SCREEN_HEIGHT))
         
         
             

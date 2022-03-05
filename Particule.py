@@ -314,3 +314,191 @@ def Top_antiquark():
     interaction={}
     return name,energy,interaction
 
+#-------------------------------------------------
+def Pion():
+    name ='Pion'
+    energy = 139.50
+    interaction={}
+    return name,energy,interaction
+
+def Kaon():
+    name ='Kaon'
+    energy = 493.66
+    interaction={}
+    return name,energy,interaction
+
+def Proton():
+    name ='Proton'
+    energy = 938.20
+    interaction={}
+    return name,energy,interaction
+
+def Neutron():
+    name ='Neutron'
+    energy = 939.50
+    interaction={}
+    return name,energy,interaction
+
+def Phi_Meson():
+    name ='Phi_Meson'
+    energy = 1019.40
+    interaction={}
+    return name,energy,interaction
+
+def Lambda():
+    name ='Lambda'
+    energy = 1115.60
+    interaction={}
+    return name,energy,interaction
+
+def Sigma():
+    name ='Sigma'
+    energy = 1189.30
+    interaction={}
+    return name,energy,interaction
+
+def Delta():
+    name ='Delta'
+    energy = 1232.00
+    interaction={}
+    return name,energy,interaction
+
+def Xi():
+    name ='Xi'
+    energy = 1314.80
+    interaction={}
+    return name,energy,interaction
+
+def D_Meson():
+    name ='D_Meson'
+    energy = 2010.26
+    interaction={}
+    return name,energy,interaction
+
+def Strange_D_Meson():
+    name ='Strange_D_Meson'
+    energy = 2112.10
+    interaction={}
+    return name,energy,interaction
+
+def Charmed_Lambda():
+    name ='Charmed_Lambda'
+    energy = 2286.40
+    interaction={}
+    return name,energy,interaction
+
+def Charmed_Sigma():
+    name ='Charmed_Sigma'
+    energy = 2453,90
+    interaction={}
+    return name,energy,interaction
+
+def Charmed_Xi():
+    name ='Charmed_Xi'
+    energy = 2467.40
+    interaction={}
+    return name,energy,interaction
+
+def Charmed_Omega():
+    name ='Charmed_Omega'
+    energy = 2695.20
+    interaction={}
+    return name,energy,interaction
+
+def Charmed_Eta_Meson():
+    name ='Charmed_Eta_Meson'
+    energy = 2983.60
+    interaction={}
+    return name,energy,interaction
+
+def Double_Charmed_Xi():
+    name ='Double_Charmed_Xi'
+    energy = 3621.20
+    interaction={}
+    return name,energy,interaction
+
+def B_Meson():
+    name ='B_Meson'
+    energy = 5325.20
+    interaction={}
+    return name,energy,interaction
+
+def Strange_B_Meson():
+    name ='Strange_B_Meson'
+    energy = 5415.40
+    interaction={}
+    return name,energy,interaction
+
+def Bottom_Lambda():
+    name ='Bottom_Lambda'
+    energy = 5619.60
+    interaction={}
+    return name,energy,interaction
+
+def Bottom_Xi():
+    name ='Bottom_Xi'
+    energy = 5791.90
+    interaction={}
+    return name,energy,interaction
+
+def Bottom_Sigma():
+    name ='Bottom_Sigma'
+    energy = 5810.50
+    interaction={}
+    return name,energy,interaction
+
+def Bottom_Omega():
+    name ='Bottom_Omega'
+    energy = 6046.10
+    interaction={}
+    return name,energy,interaction
+
+def Upsilon_Meson():
+    name ='Upsilon_Meson'
+    energy = 9460.30
+    interaction={}
+    return name,energy,interaction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

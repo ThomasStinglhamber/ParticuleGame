@@ -2,5 +2,8 @@ Up_quark
 Up_antiquark
 Down_quark
 Down_antiquark
-Proton
 Neutron
+Phi_Meson
+Kaon
+Sigma
+Xi
