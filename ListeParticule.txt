@@ -2,8 +2,12 @@ Up_quark
 Up_antiquark
 Down_quark
 Down_antiquark
-Neutron
-Phi_Meson
+Strange_quark
+Strange_antiquark
 Kaon
+Charmed_quark
+Charmed_antiquark
+Pion
+Delta
 Sigma
-Xi
+Lambda

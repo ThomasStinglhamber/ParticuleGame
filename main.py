@@ -101,8 +101,8 @@ def Principal(INTERACTION):
             
         
         puntos = checkpoint()
-        palier1,palier2,palier3 = Palier(puntos)
-        #print(palier1)
+        #Palier1(puntos)
+        #Palier2(puntos)
         
         if NouvelleDecouverte == False:         # si la combinaison donne rien on le dit 
             print("la combinaison donne  rien")

@@ -145,6 +145,44 @@ def affich_point():
     TextSurf, TextRect = text_objects("Points : "+str(punnttos), smallText)
     TextRect.center = ((display_width*3/4),(display_height/25))
     gameDisplay.blit(TextSurf, TextRect)
+    return punnttos
+
+def Palier1(totalepoint):
+    file1 = open('ListeParticule.txt', 'r')
+    data1 = file1.read().splitlines()
+    if 'Charmed_quark'and 'Charmed_antiquark' not in data1 and int(totalepoint) >= 1300:
+        file2 = open('ListeParticule.txt', 'a')
+        file2.write('Charmed_quark'+ "\n")
+        file2.write('Charmed_antiquark'+ "\n")
+        file2.close()
+        print('Palier 1 Débloqué --> Nouvelle particule disponible !')
+    if int(totalepoint) <= 1300:
+        pass
+        #print('pas assez denergie')
+    if 'Charmed_quark'and 'Charmed_antiquark'  in data1 and int(totalepoint) >= 1300:
+        pass
+    else : pass
+
+    file1.close()
+
+def Palier2(totalepoint):
+    file1 = open('ListeParticule.txt', 'r')
+    data1 = file1.read().splitlines()
+    if 'Bottom_quark'and 'Bottom_antiquark' not in data1 and totalepoint >= str(4200):
+        
+        file2 = open('ListeParticule.txt', 'a')
+        file2.write('Bottom_quark'+ "\n")
+        file2.write('Bottom_antiquark'+ "\n")
+        file2.close()
+        print('Palier 2 Débloqué --> Nouvelle particule disponible !')
+    if totalepoint <= str(4200):
+        pass
+        #print('pas assez denergie')
+    if 'Bottom_quark'and 'Bottom_antiquark'  in data1 and totalepoint >= str(4200):
+        pass
+    else : pass
+
+    file1.close()
     
 def affich_derniere_decouv(decouvertee):
     punnttos=checkpoint_noprint()
@@ -201,6 +239,7 @@ def tile_cote():
     button_col = 0
     button_row = 0
     liste_decouv=[]
+    nom_list = []
     file4 = open('ListeParticule.txt', 'r')
     parti=file4.read().splitlines()
     file4.close()
@@ -211,14 +250,53 @@ def tile_cote():
         liste_decouv.append(chif)
         
     #print(liste_decouv)
-    for i in liste_decouv:# img_list
-        	tile_button = buttonn.Button( SCREEN_WIDTH+( 65*button_col),  65*button_row, img_list[i], 1)
-        	button_list.append(tile_button)
-        	button_col += 1
-        	if button_col == 4:
+    for i in sorted(liste_decouv):# img_list
+        tile_button = buttonn.Button( SCREEN_WIDTH+( 65*button_col),  65*button_row, img_list[i], 1)
+        button_list.append(tile_button)
+        #print(i)
+        #nomm=name_parti(i)
+        #smallText2 = pygame.font.SysFont("comicsansms",10)
+        #TextSurf2, TextRect2 = text_objects(str(nomm), smallText2)
+        #TextRect2.center = ((SCREEN_WIDTH+( 65*button_col+22),  65*button_row+55))
+        #gameDisplay.blit(TextSurf2, TextRect2)
+        #nom_list.append(nomm)
+        button_col += 1
+        if button_col == 4:
         		button_row += 1
         		button_col = 0
-    return button_list
+        
+
+    return button_list,liste_decouv
+
+def nom_tile():
+    #button_list = []
+    button_col2 = 0
+    button_row2 = 0
+    liste_decouv=[]
+    nom_list = []
+    file4 = open('ListeParticule.txt', 'r')
+    parti=file4.read().splitlines()
+    file4.close()
+    
+    #print(parti)
+    for i in parti:
+        chif=affichage_particule(i)
+        liste_decouv.append(chif)
+        
+    for i in sorted(liste_decouv):# img_list
+        nomm=name_parti(i)
+        #print(i,nomm)
+        smallText2 = pygame.font.SysFont("comicsansms",10)
+        TextSurf2, TextRect2 = text_objects(str(nomm), smallText2)
+        TextRect2.center = ((SCREEN_WIDTH+( 65*button_col2+22),  65*button_row2+55))
+        gameDisplay.blit(TextSurf2, TextRect2)
+        nom_list.append(nomm)
+        button_col2 += 1
+        if button_col2 == 4:
+        		button_row2 += 1
+        		button_col2 = 0
+                
+                
 
 
 def game_loop():
@@ -232,23 +310,31 @@ def game_loop():
     gray=(156,156,156)
     
     current_tile = 0
-    
+    #punnttos=checkpoint_noprint()
 
  
+    #draw_grid()
     
-    button_list =tile_cote()
+    button_list,liste_decouv =tile_cote()
+    #print(liste_decouv)
+    #trie_button_list =sorted(button_list)
     players=[]
     NOM=[]
     movings=[]
     newone ='Nothing'
-
     group1 = pygame.sprite.Group()
     while not gameExit:
-        affich_point()
+        #gameDisplay.blit(TextSurf2, TextRect2)
+        punnttos=affich_point()
+        nom_tile()
+        Palier1(punnttos)
         clock.tick(10)
         intera=[]
         button_count=0
-        for button_count,i in enumerate(button_list):
+        for button_count,i in enumerate(button_list):#zip(sorted(liste_decouv),button_list):
+            #print('premier')
+            #print(button_count,i)
+ 
             if i.draw(screen):
                 current_tile =button_count
                 name = name_parti(current_tile)
@@ -296,6 +382,7 @@ def game_loop():
                     for j in range(len(players)):
                             for k in range(len(players)):
                                 if len(players)>=3:
+                                    #gameDisplay.blit(TextSurf2, TextRect2)
                                     if i != j and i != k and j != k:
                                         collision1 = pygame.sprite.collide_rect(players[i], players[j])
                                         collision2 = pygame.sprite.collide_rect(players[i], players[k])
@@ -312,7 +399,10 @@ def game_loop():
                                                  del movings[0:len(movings)]
                                                  group1.empty()
                                                  time.sleep(1)
-                                                 button_list =tile_cote()
+                                                 button_list,liste_decouv=tile_cote()
+                                                 nom_tile()
+                                                 #gameDisplay.blit(TextSurf2, TextRect2)
+
                                                  #break
                                         #print(collision1,collision2)
                                         if collision1 == True and collision2 == True:
@@ -327,16 +417,20 @@ def game_loop():
                                                  movings.clear()
                                                  group1.empty()
                                                  time.sleep(1)
-                                                 button_list =tile_cote()
+                                                 button_list,liste_decouv =tile_cote()
+                                                 nom_tile()
+                                                 #gameDisplay.blit(TextSurf2, TextRect2)
+
                                                  #break
                                             #time.sleep(3)
             affich_derniere_decouv(newone)
             pygame.display.update()
         gameDisplay.fill(white)
+        
         pygame.draw.rect(screen, gray, (SCREEN_WIDTH,0, SIDE_MARGIN, SCREEN_HEIGHT))
+        nom_tile()
         
-        
-            
+        #Palier2(punnttos)
 
         #draw_grid()
         
@@ -365,7 +459,6 @@ def PasImplementer():
         gameDisplay.blit(TextSurf, TextRect)
         largeur=300
         button_white("Back",(display_width-largeur)/2,display_height*4/5,largeur,50,black,black,mode)
-
 
         pygame.display.update()
         clock.tick(15)

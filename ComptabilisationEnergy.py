@@ -96,34 +96,6 @@ def checkpoint_noprint():# permet d'update  les points mais ne print pas
     
     return totalepoint
 
-def Palier(point): # definition des differents palier en fonction des points qu'on a 
-    palier1=False
-    palier2=False
-    palier3=False
-    if int(point) >= 100:
-        palier1=True
-        
-    if int(point) >=1300:
-        palier2=True
-        
-    if int(point) >=4200:
-        palier3=True
-    
-    return palier1,palier2,palier3
 
-# =============================================================================
-#     1er pallier, on a de base 100 Mev et on doit avoir 1300 MeV pour pouvoir debloquer
-#     le quark et antiquark charmed. On a 8 reaction mais on peut dire que si on en trouve
-#     6 alors on debloque charmed. chaque decouverte donne donc 200MeV a notre jauge.
-#     Une fois les 1300 MeV, on debloque charmed, on a donc acces a des reactions supplementaire.
-#     
-#     2eme pallier, dee 1300 a 4200 pour debloque le quark et antiquark botttom. Il y a 9 reaction donc 
-#     on va dire que si  on en trouve 7 c est bon --> plusoum 415 MeV par decouverte.
-#     
-#     3eme pallier --> mega free il reste 7 reaction jusque quark top mais on l utilise nulle part
-#     donc jusqu a la fin il reste 15 reaction.
-#     
-#     4eme pallier --> il y a des particule on connait par  leur masse donc on peut
-#     dire que a partir du pallier 3 chaque decouverte donne x MeV.
-# =============================================================================
-    
+
+
