@@ -28,15 +28,15 @@ block_color = (53,115,255)
 
 
 
-SCREEN_WIDTH = 1360
+SCREEN_WIDTH = 1260
 SCREEN_HEIGHT = 900
 LOWER_MARGIN = 0
-SIDE_MARGIN = 270
+SIDE_MARGIN = 360
 #define game variables
 ROWS = 20
 MAX_COLS = 6
 TILE_SIZE = 45
-TILE_TYPES = 21
+TILE_TYPES = 42
 level = 0
 
 scroll_left = False
@@ -143,7 +143,7 @@ def affich_point():
     punnttos=checkpoint_noprint()
     smallText = pygame.font.SysFont("comicsansms",20)
     TextSurf, TextRect = text_objects("Points : "+str(punnttos), smallText)
-    TextRect.center = ((display_width*3/4),(display_height/25))
+    TextRect.center = ((display_width*25/40),(display_height/25))
     gameDisplay.blit(TextSurf, TextRect)
     return punnttos
 
@@ -188,7 +188,7 @@ def affich_derniere_decouv(decouvertee):
     punnttos=checkpoint_noprint()
     smallText = pygame.font.SysFont("comicsansms",20)
     TextSurf, TextRect = text_objects("Derniere decouverte : "+str(decouvertee), smallText)
-    TextRect.center = ((display_width*29/40),(display_height/58))
+    TextRect.center = ((display_width*25/40),(display_height/58))
     gameDisplay.blit(TextSurf, TextRect)
                  
         
@@ -233,7 +233,9 @@ def tile_cote():
         	img = pygame.transform.scale(img, (TILE_SIZE, TILE_SIZE))
         	img_list.append(img)
         
-        
+    
+    img1 = pygame.image.load(f'img/background.png').convert_alpha()
+    img2 = pygame.transform.scale(img1, (TILE_SIZE, TILE_SIZE))
     #make a button list
     button_list = []
     button_col = 0
@@ -250,21 +252,27 @@ def tile_cote():
         liste_decouv.append(chif)
         
     #print(liste_decouv)
-    for i in sorted(liste_decouv):# img_list
-        tile_button = buttonn.Button( SCREEN_WIDTH+( 65*button_col),  65*button_row, img_list[i], 1)
-        button_list.append(tile_button)
-        #print(i)
-        #nomm=name_parti(i)
-        #smallText2 = pygame.font.SysFont("comicsansms",10)
-        #TextSurf2, TextRect2 = text_objects(str(nomm), smallText2)
-        #TextRect2.center = ((SCREEN_WIDTH+( 65*button_col+22),  65*button_row+55))
-        #gameDisplay.blit(TextSurf2, TextRect2)
-        #nom_list.append(nomm)
-        button_col += 1
-        if button_col == 4:
-        		button_row += 1
-        		button_col = 0
+    nexlist=[]
+    for k in range(TILE_TYPES):
+        nexlist.append(k)
         
+    
+    for i in nexlist:#sorted(liste_decouv):# img_list
+        if i in sorted(liste_decouv):
+            tile_button = buttonn.Button( SCREEN_WIDTH+( 90*button_col+20),  65*button_row, img_list[i], 1)
+            button_list.append(tile_button)
+          
+            button_col += 1
+            if button_col == 4:
+            		button_row += 1
+            		button_col = 0
+        if i not in sorted(liste_decouv): 
+            tile_button = buttonn.Button( SCREEN_WIDTH+( 90*button_col+20),  65*button_row,img2, 1)
+            button_list.append(tile_button)
+            button_col += 1
+            if button_col == 4:
+            		button_row += 1
+            		button_col = 0
 
     return button_list,liste_decouv
 
@@ -283,19 +291,31 @@ def nom_tile():
         chif=affichage_particule(i)
         liste_decouv.append(chif)
         
-    for i in sorted(liste_decouv):# img_list
-        nomm=name_parti(i)
-        #print(i,nomm)
-        smallText2 = pygame.font.SysFont("comicsansms",10)
-        TextSurf2, TextRect2 = text_objects(str(nomm), smallText2)
-        TextRect2.center = ((SCREEN_WIDTH+( 65*button_col2+22),  65*button_row2+55))
-        gameDisplay.blit(TextSurf2, TextRect2)
-        nom_list.append(nomm)
-        button_col2 += 1
-        if button_col2 == 4:
-        		button_row2 += 1
-        		button_col2 = 0
+    nexlist=[]
+    for k in range(TILE_TYPES):
+        nexlist.append(k)
+        
+    
+    for j in nexlist:#sorted(liste_decouv):# img_list
+        if j in sorted(liste_decouv):
+            nomm=name_parti(j)
+            #print(i,nomm)
+            smallText2 = pygame.font.SysFont("comicsansms",10)
+            TextSurf2, TextRect2 = text_objects(str(nomm), smallText2)
+            TextRect2.center = ((SCREEN_WIDTH+( 90*button_col2+22+20),  65*button_row2+55))
+            gameDisplay.blit(TextSurf2, TextRect2)
+            nom_list.append(nomm)
+            button_col2 += 1
+            if button_col2 == 4:
+            		button_row2 += 1
+            		button_col2 = 0
                 
+        if j not in sorted(liste_decouv):
+            nom_list.append(nomm)
+            button_col2 += 1
+            if button_col2 == 4:
+            		button_row2 += 1
+            		button_col2 = 0
                 
 
 
@@ -323,34 +343,49 @@ def game_loop():
     movings=[]
     newone ='Nothing'
     group1 = pygame.sprite.Group()
+    newlist=[]
+    #print(len(button_list))
+    for k in range(TILE_TYPES):
+        newlist.append(k)
+
     while not gameExit:
         #gameDisplay.blit(TextSurf2, TextRect2)
         punnttos=affich_point()
         nom_tile()
         Palier1(punnttos)
+        Palier2(punnttos)
         clock.tick(10)
         intera=[]
         button_count=0
-        for button_count,i in enumerate(button_list):#zip(sorted(liste_decouv),button_list):
+        for button_count,i in zip(sorted(newlist),button_list):#enumerate(button_list): #
             #print('premier')
             #print(button_count,i)
- 
-            if i.draw(screen):
-                current_tile =button_count
-                name = name_parti(current_tile)
-                color = color_parti(name)
-                lastplayer=Player(name, color, random.randrange(500), random.randrange(500))
-                test = Player.nom(name)
-                #print(test)
-                players.append(lastplayer)
-                movings.append(False)
-                NOM.append(test)
-                group1.add(players[-1])
-                group1.update()
-                #print(lastplayer)
-                
-                
+            #if 
+            if i.draw(screen) :
+                if button_count in liste_decouv:
+                    current_tile =button_count
+                    name = name_parti(current_tile)
+                    color = color_parti(name)
+                    lastplayer=Player(name, color, random.randrange(500), random.randrange(500))
+                    test = Player.nom(name)
+                    #print(test)
+                    players.append(lastplayer)
+                    movings.append(False)
+                    NOM.append(test)
+                    group1.add(players[-1])
+                    group1.update()
+                    #print(lastplayer)
+                if button_count not in newlist:
+                    current_tile =button_count
+                    name = name_parti(current_tile)
+                    group1.update()
+                    
         group1.draw(gameDisplay)
+        #newlist =button_list
+        #print(newlist)
+        #test=[None,None,None,None,None]
+        #newlist =newlist + test
+        
         pygame.draw.rect(screen, red, button_list[current_tile].rect, 3)
         trash = pygame.draw.rect(screen, red, (0,SCREEN_HEIGHT-100, 100, SCREEN_HEIGHT))
         for event in pygame.event.get():

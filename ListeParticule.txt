@@ -8,6 +8,16 @@ Kaon
 Charmed_quark
 Charmed_antiquark
 Pion
-Delta
+Proton
 Sigma
 Lambda
+Neutron
+Charmed_Lambda
+Charmed_Sigma
+Charmed_Xi
+Double_Charmed_Xi
+Delta
+Double_Charmed_Omega
+Bottom_quark
+Bottom_antiquark
+Upsilon_Meson
