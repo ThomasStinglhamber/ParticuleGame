@@ -21,3 +21,17 @@ Double_Charmed_Omega
 Bottom_quark
 Bottom_antiquark
 Upsilon_Meson
+Strange_D_Meson
+Bottom_Sigma
+Strange_B_Meson
+Phi_Meson
+Xi
+Charmed_Eta_Meson
+Double_Charmed_Bottom_Omega
+Charmed_B_Meson
+Double_Bottom_Omega
+D_Meson
+Charmed_Omega
+Bottom_Xi
+Top_quark
+Top_antiquark

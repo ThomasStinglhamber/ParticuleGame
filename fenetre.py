@@ -9,6 +9,7 @@ from conversionchiffre_parti import *
 from color_particule import *
 from main import *
 from conversionSTR_DEF import *
+from Paliers import *
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -32,6 +33,7 @@ SCREEN_WIDTH = 1260
 SCREEN_HEIGHT = 900
 LOWER_MARGIN = 0
 SIDE_MARGIN = 360
+largeur=300
 #define game variables
 ROWS = 20
 MAX_COLS = 6
@@ -128,7 +130,7 @@ def game_intro():
                 quit()
                 
         gameDisplay.fill(white)
-        largeText = pygame.font.SysFont("comicsansms",115)
+        largeText = pygame.font.SysFont("arial",115)
         TextSurf, TextRect = text_objects("Particule Game", largeText)
         TextRect.center = ((display_width/2),(display_height/3))
         gameDisplay.blit(TextSurf, TextRect)
@@ -147,42 +149,7 @@ def affich_point():
     gameDisplay.blit(TextSurf, TextRect)
     return punnttos
 
-def Palier1(totalepoint):
-    file1 = open('ListeParticule.txt', 'r')
-    data1 = file1.read().splitlines()
-    if 'Charmed_quark'and 'Charmed_antiquark' not in data1 and int(totalepoint) >= 1300:
-        file2 = open('ListeParticule.txt', 'a')
-        file2.write('Charmed_quark'+ "\n")
-        file2.write('Charmed_antiquark'+ "\n")
-        file2.close()
-        print('Palier 1 Débloqué --> Nouvelle particule disponible !')
-    if int(totalepoint) <= 1300:
-        pass
-        #print('pas assez denergie')
-    if 'Charmed_quark'and 'Charmed_antiquark'  in data1 and int(totalepoint) >= 1300:
-        pass
-    else : pass
 
-    file1.close()
-
-def Palier2(totalepoint):
-    file1 = open('ListeParticule.txt', 'r')
-    data1 = file1.read().splitlines()
-    if 'Bottom_quark'and 'Bottom_antiquark' not in data1 and totalepoint >= str(4200):
-        
-        file2 = open('ListeParticule.txt', 'a')
-        file2.write('Bottom_quark'+ "\n")
-        file2.write('Bottom_antiquark'+ "\n")
-        file2.close()
-        print('Palier 2 Débloqué --> Nouvelle particule disponible !')
-    if totalepoint <= str(4200):
-        pass
-        #print('pas assez denergie')
-    if 'Bottom_quark'and 'Bottom_antiquark'  in data1 and totalepoint >= str(4200):
-        pass
-    else : pass
-
-    file1.close()
     
 def affich_derniere_decouv(decouvertee):
     punnttos=checkpoint_noprint()
@@ -208,14 +175,14 @@ def mode():
         TextSurf, TextRect = text_objects("Mode de jeu", largeText)
         TextRect.center = ((display_width/2),(display_height/3))
         gameDisplay.blit(TextSurf, TextRect)
-        largeur=300
+        
         button_white("Combinaison",(display_width-largeur)/2,display_height*3/5,largeur,50,blue,bright_blue,game_loop)
         button_white("Désintégration",(display_width-largeur)/2,display_height*2/3,largeur,50,blue,bright_blue,PasImplementer)
         button_white("Mendeleïev",(display_width-largeur)/2,display_height*11/15,largeur,50,blue,bright_blue,PasImplementer)
         button_white("Back",(display_width-largeur)/2,display_height*4/5,largeur,50,black,black,game_intro)
 
         pygame.display.update()
-        clock.tick(15)
+        #clock.tick(15)
     
 def draw_grid():
 	#vertical lines
@@ -354,7 +321,8 @@ def game_loop():
         nom_tile()
         Palier1(punnttos)
         Palier2(punnttos)
-        clock.tick(10)
+        Palier3(punnttos)
+        clock.tick(20)
         intera=[]
         button_count=0
         for button_count,i in zip(sorted(newlist),button_list):#enumerate(button_list): #
@@ -366,7 +334,7 @@ def game_loop():
                     current_tile =button_count
                     name = name_parti(current_tile)
                     color = color_parti(name)
-                    lastplayer=Player(name, color, random.randrange(500), random.randrange(500))
+                    lastplayer=Player(name, color, random.randrange(1000), random.randrange(700))
                     test = Player.nom(name)
                     #print(test)
                     players.append(lastplayer)
@@ -464,12 +432,8 @@ def game_loop():
         
         pygame.draw.rect(screen, gray, (SCREEN_WIDTH,0, SIDE_MARGIN, SCREEN_HEIGHT))
         nom_tile()
-        
-        #Palier2(punnttos)
-
-        #draw_grid()
-        
-    
+        button_white("Menu",(display_width-largeur-200),display_height*17/19,100,50,black,black,mode)
+            
     return interaction
         
             
