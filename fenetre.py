@@ -7,9 +7,11 @@ from affichage_parti import *
 import random
 from conversionchiffre_parti import *
 from color_particule import *
-from main import *
+from main import * 
 from conversionSTR_DEF import *
 from Paliers import *
+#from tableau_periodique import *
+#from tableau_periodique import tableau
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -183,6 +185,9 @@ def mode():
 
         pygame.display.update()
         #clock.tick(15)
+
+def periodique():
+    tableau()
     
 def draw_grid():
 	#vertical lines
