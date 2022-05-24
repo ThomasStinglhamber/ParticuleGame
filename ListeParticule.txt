@@ -6,8 +6,3 @@ Strange_quark
 Strange_antiquark
 Top_quark
 Top_antiquark
-Proton
-Bottom_quark
-Bottom_antiquark
-Sigma
-Kaon
